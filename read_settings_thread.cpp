@@ -1562,7 +1562,7 @@ void read_settings_thread::run()
 
   usleep(TMC_GDS_DELAY);
 
-  if(devparms->modelserie == 6)
+  if(devparms->modelserie == 6 || devparms->modelserie == 2)
   {
     if(tmc_write(":BUS1:MODE?") != 11)
     {
@@ -1608,7 +1608,7 @@ void read_settings_thread::run()
 
   usleep(TMC_GDS_DELAY);
 
-  if(devparms->modelserie == 6)
+  if(devparms->modelserie == 6 || devparms->modelserie == 2)
   {
     if(tmc_write(":BUS1:DISP?") != 11)
     {
@@ -1635,7 +1635,7 @@ void read_settings_thread::run()
 
   usleep(TMC_GDS_DELAY);
 
-  if(devparms->modelserie == 6)
+  if(devparms->modelserie == 6 || devparms->modelserie == 2)
   {
     if(tmc_write(":BUS1:FORM?") != 11)
     {
@@ -1681,7 +1681,7 @@ void read_settings_thread::run()
 
   usleep(TMC_GDS_DELAY);
 
-  if(devparms->modelserie == 6)
+  if(devparms->modelserie == 6 || devparms->modelserie == 2)
   {
     if(tmc_write(":BUS1:SPI:OFFS?") != 15)
     {
@@ -1716,6 +1716,14 @@ void read_settings_thread::run()
       goto GDS_OUT_ERROR;
     }
   }
+  else if (devparms->modelserie == 2)
+  {
+      if(tmc_write(":LA:POD1:THR?") != 13)
+      {
+        line = __LINE__;
+        goto GDS_OUT_ERROR;
+      }
+  }
   else
   {
     if(tmc_write(":DEC1:THRE:CHAN1?") != 17)
@@ -1743,6 +1751,14 @@ void read_settings_thread::run()
       goto GDS_OUT_ERROR;
     }
   }
+  else if (devparms->modelserie == 2)
+  {
+      if(tmc_write(":LA:POD2:THR?") != 13)
+      {
+        line = __LINE__;
+        goto GDS_OUT_ERROR;
+      }
+  }
   else
   {
     if(tmc_write(":DEC1:THRE:CHAN2?") != 17)
@@ -1762,7 +1778,7 @@ void read_settings_thread::run()
 
   usleep(TMC_GDS_DELAY);
 
-  if(devparms->modelserie == 6)
+  if(devparms->modelserie == 6 || devparms->modelserie == 2)
   {
     if(tmc_write(":BUS1:SPI:SCLK:THR?") != 19)
     {
@@ -1789,7 +1805,7 @@ void read_settings_thread::run()
 
   usleep(TMC_GDS_DELAY);
 
-  if(devparms->modelserie == 6)
+  if(devparms->modelserie == 6 || devparms->modelserie == 2)
   {
     if(tmc_write(":BUS1:SPI:SS:THR?") != 17)
     {
@@ -1814,7 +1830,7 @@ void read_settings_thread::run()
 
   devparms->math_decode_threshold[3] = atof(device->buf);
 
-  if(devparms->modelserie == 6)
+  if(devparms->modelserie == 6 || devparms->modelserie == 2)
   {
     usleep(TMC_GDS_DELAY);
 
@@ -1850,8 +1866,7 @@ void read_settings_thread::run()
 //    devparms->math_decode_threshold_uart_rx = atof(device->buf);
     devparms->math_decode_threshold_uart_rx = atof(device->buf) * 10.0;  // hack for firmware bug!
   }
-
-  if(devparms->modelserie != 6)
+  else
   {
     usleep(TMC_GDS_DELAY);
 
@@ -1872,7 +1887,7 @@ void read_settings_thread::run()
 
   usleep(TMC_GDS_DELAY);
 
-  if(devparms->modelserie == 6)
+  if(devparms->modelserie == 6 || devparms->modelserie == 2)
   {
     if(tmc_write(":BUS1:RS232:RX?") != 15)
     {
@@ -1922,7 +1937,7 @@ void read_settings_thread::run()
 
   usleep(TMC_GDS_DELAY);
 
-  if(devparms->modelserie == 6)
+  if(devparms->modelserie == 6 || devparms->modelserie == 2)
   {
     if(tmc_write(":BUS1:RS232:TX?") != 15)
     {
@@ -1972,7 +1987,7 @@ void read_settings_thread::run()
 
   usleep(TMC_GDS_DELAY);
 
-  if(devparms->modelserie == 6)
+  if(devparms->modelserie == 6 || devparms->modelserie == 2)
   {
     if(tmc_write(":BUS1:RS232:POL?") != 16)
     {
@@ -2006,7 +2021,7 @@ void read_settings_thread::run()
 
   usleep(TMC_GDS_DELAY);
 
-  if(devparms->modelserie == 6)
+  if(devparms->modelserie == 6 || devparms->modelserie == 2)
   {
     if(tmc_write(":BUS1:RS232:END?") != 16)
     {
@@ -2040,7 +2055,7 @@ void read_settings_thread::run()
 
   usleep(TMC_GDS_DELAY);
 
-  if(devparms->modelserie == 6)
+  if(devparms->modelserie == 6 || devparms->modelserie == 2)
   {
     if(tmc_write(":BUS1:RS232:BAUD?") != 17)
     {
@@ -2067,7 +2082,7 @@ void read_settings_thread::run()
 
   usleep(TMC_GDS_DELAY);
 
-  if(devparms->modelserie == 6)
+  if(devparms->modelserie == 6 || devparms->modelserie == 2)
   {
     if(tmc_write(":BUS1:RS232:DBIT?") != 17)
     {
@@ -2094,7 +2109,7 @@ void read_settings_thread::run()
 
   usleep(TMC_GDS_DELAY);
 
-  if(devparms->modelserie == 6)
+  if(devparms->modelserie == 6 || devparms->modelserie == 2)
   {
     if(tmc_write(":BUS1:RS232:SBIT?") != 17)
     {
@@ -2132,7 +2147,7 @@ void read_settings_thread::run()
 
   usleep(TMC_GDS_DELAY);
 
-  if(devparms->modelserie == 6)
+  if(devparms->modelserie == 6 || devparms->modelserie == 2)
   {
     if(tmc_write(":BUS1:RS232:PAR?") != 16)
     {
@@ -2174,7 +2189,7 @@ void read_settings_thread::run()
 
   usleep(TMC_GDS_DELAY);
 
-  if(devparms->modelserie == 6)
+  if(devparms->modelserie == 6 || devparms->modelserie == 2)
   {
     if(tmc_write(":BUS1:SPI:SCLK:SOUR?") != 20)
     {
@@ -2219,6 +2234,14 @@ void read_settings_thread::run()
   if(devparms->modelserie == 6)
   {
     if(tmc_write(":BUS1:SPI:MISO:SOUR?") != 20)
+    {
+      line = __LINE__;
+      goto GDS_OUT_ERROR;
+    }
+  }
+  else if(devparms->modelserie == 2)
+  {
+    if(tmc_write(":BUS1:SPI:SDA:SOUR?") != 19)
     {
       line = __LINE__;
       goto GDS_OUT_ERROR;
@@ -2274,6 +2297,14 @@ void read_settings_thread::run()
       goto GDS_OUT_ERROR;
     }
   }
+  else if(devparms->modelserie == 2)
+  {
+    if(tmc_write(":BUS1:SPI:SDA:SOUR?") != 19)
+    {
+      line = __LINE__;
+      goto GDS_OUT_ERROR;
+    }
+  }
   else
   {
     if(tmc_write(":DEC1:SPI:MOSI?") != 15)
@@ -2316,7 +2347,7 @@ void read_settings_thread::run()
 
   usleep(TMC_GDS_DELAY);
 
-  if(devparms->modelserie == 6)
+  if(devparms->modelserie == 6 || devparms->modelserie == 2)
   {
     if(tmc_write(":BUS1:SPI:SS:SOUR?") != 18)
     {
@@ -2366,7 +2397,7 @@ void read_settings_thread::run()
 
   usleep(TMC_GDS_DELAY);
 
-  if(devparms->modelserie == 6)
+  if(devparms->modelserie == 6 || devparms->modelserie == 2)
   {
     if(tmc_write(":BUS1:SPI:SS:POL?") != 17)
     {
@@ -2406,7 +2437,7 @@ void read_settings_thread::run()
         devparms->math_decode_spi_select = 1;
       }
 
-  if(devparms->modelserie != 6)
+  if(devparms->modelserie == 6)
   {
     usleep(TMC_GDS_DELAY);
 
@@ -2436,10 +2467,20 @@ void read_settings_thread::run()
   {
     usleep(TMC_GDS_DELAY);
 
-    if(tmc_write(":DEC1:SPI:TIM?") != 14)
+    if (devparms->modelserie == 2) {
+        if(tmc_write(":TRIG:SPI:TIM?") != 14)
+        {
+          line = __LINE__;
+          goto GDS_OUT_ERROR;
+        }
+    }
+    else
     {
-      line = __LINE__;
-      goto GDS_OUT_ERROR;
+        if(tmc_write(":DEC1:SPI:TIM?") != 14)
+        {
+          line = __LINE__;
+          goto GDS_OUT_ERROR;
+        }
     }
 
     if(tmc_read() < 1)
@@ -2456,6 +2497,14 @@ void read_settings_thread::run()
   if(devparms->modelserie == 6)
   {
     if(tmc_write(":BUS1:SPI:MOSI:POL?") != 19)
+    {
+      line = __LINE__;
+      goto GDS_OUT_ERROR;
+    }
+  }
+  else if(devparms->modelserie == 2)
+  {
+    if(tmc_write(":BUS1:SPI:SDA:POL?") != 18)
     {
       line = __LINE__;
       goto GDS_OUT_ERROR;
@@ -2487,7 +2536,7 @@ void read_settings_thread::run()
 
   usleep(TMC_GDS_DELAY);
 
-  if(devparms->modelserie == 6)
+  if(devparms->modelserie == 6 || devparms->modelserie == 2)
   {
     if(tmc_write(":BUS1:SPI:SCLK:SLOP?") != 20)
     {
@@ -2529,7 +2578,7 @@ void read_settings_thread::run()
 
   usleep(TMC_GDS_DELAY);
 
-  if(devparms->modelserie == 6)
+  if(devparms->modelserie == 6 || devparms->modelserie == 2)
   {
     if(tmc_write(":BUS1:SPI:DBIT?") != 15)
     {
@@ -2556,7 +2605,7 @@ void read_settings_thread::run()
 
   usleep(TMC_GDS_DELAY);
 
-  if(devparms->modelserie == 6)
+  if(devparms->modelserie == 6 || devparms->modelserie == 2)
   {
     if(tmc_write(":BUS1:SPI:END?") != 14)
     {
@@ -2590,7 +2639,7 @@ void read_settings_thread::run()
 
   usleep(TMC_GDS_DELAY);
 
-  if(devparms->modelserie != 6)
+  if(devparms->modelserie != 6 && devparms->modelserie != 2)
   {
     if(tmc_write(":FUNC:WREC:ENAB?") != 16)
     {
